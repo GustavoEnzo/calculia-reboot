@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8a2f6040325b44b9600eebfd92cf6b, type: 3}
   m_Name: Question2
   m_EditorClassIdentifier: 
-  question: "Quantos bra\xE7os tem um polvo?"
-  correctAnswer: 8
-  wrongAnswer1: 4
-  wrongAnswer2: 5
-  wrongAnswer3: 6
+  question: "Quantos bal\xF5es vermelhos tem na imagem?"
+  correctAnswer: 2
+  wrongAnswer1: 3
+  wrongAnswer2: 1
+  wrongAnswer3: 4
+  questionImage: {fileID: 0}

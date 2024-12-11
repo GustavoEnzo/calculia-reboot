@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     [Header("Screens")]
     [SerializeField] GameObject gameScreen;
     [SerializeField] GameObject gameOverScreen;
+    [Header("Questions")]
+    [SerializeField] Image questionImage;
 
     [Header("Questions")]
     [SerializeField] Text questionText;
@@ -18,7 +20,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Button[] buttons;
     [SerializeField] Text[] options;
     [SerializeField] CanvasGroup canvas;
-    [SerializeField] Image questionImage;
+    
 
     [Header("Buttons State")]
     [SerializeField] Sprite defaultButton;
@@ -62,42 +64,67 @@ public class GameController : MonoBehaviour
 
     void NextQuestion()
     {
-        if (roundsLeft <= 0) {
+        if (roundsLeft <= 0)
+        {
             GameOver();
             return;
         }
 
-      
-       
+        // Habilitar os botões
         foreach (var button in buttons)
         {
             button.interactable = true;
         }
 
+        // Habilitar o botão de dica
         tipButton.interactable = true;
 
+        // Selecionar uma pergunta aleatória
         currentQuestion = questions[Random.Range(0, questions.Count)];
 
+        // Atualizar o texto da pergunta
         questionText.text = currentQuestion.question;
-            
-        List<string> answers = new List<string>();
-        answers.Add(currentQuestion.correctAnswer);
-        answers.Add(currentQuestion.wrongAnswer1);
-        answers.Add(currentQuestion.wrongAnswer2);
-        answers.Add(currentQuestion.wrongAnswer3);
 
-        
-        foreach (var option in options)
+        // Definir a imagem da pergunta (caso exista)
+        if (currentQuestion.questionImage != null)
         {
-            int answerIndex = Random.Range(0, answers.Count);
-            option.text = answers[answerIndex];
-            answers.Remove(answers[answerIndex]);
+            questionImage.sprite = currentQuestion.questionImage;
+            questionImage.gameObject.SetActive(true);
         }
-      
+        else
+        {
+            questionImage.gameObject.SetActive(false);
+        }
 
+        // Criar uma lista de respostas e embaralhar
+        List<string> answers = new List<string>
+    {
+        currentQuestion.correctAnswer,
+        currentQuestion.wrongAnswer1,
+        currentQuestion.wrongAnswer2,
+        currentQuestion.wrongAnswer3
+    };
+
+        // Embaralhando as respostas
+        for (int i = answers.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            string temp = answers[i];
+            answers[i] = answers[randomIndex];
+            answers[randomIndex] = temp;
+        }
+
+        // Configurar o texto das opções
+        for (int i = 0; i < options.Length; i++)
+        {
+            options[i].text = answers[i];
+        }
+
+        // Remover a pergunta da lista e diminuir o número de rodadas restantes
         questions.Remove(currentQuestion);
         roundsLeft--;
     }
+
 
     public void SelectOption(GameObject button)
     {

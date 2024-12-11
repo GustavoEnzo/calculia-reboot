@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8a2f6040325b44b9600eebfd92cf6b, type: 3}
   m_Name: Question1
   m_EditorClassIdentifier: 
-  question: Em que lugar vivem mais cangurus do que pessoas?
-  correctAnswer: "Austr\xE1lia"
-  wrongAnswer1: "Nova Zel\xE2ndia"
-  wrongAnswer2: "\xC1frica do Sul"
-  wrongAnswer3: "Papua-Nova Guin\xE9"
+  question: "Quantos bal\xF5es tem na imagem?"
+  correctAnswer: 3
+  wrongAnswer1: 4
+  wrongAnswer2: 2
+  wrongAnswer3: 5
   questionImage: {fileID: 21300000, guid: 3d4208c9c97b1d94e9dcb0ba5178343b, type: 3}
